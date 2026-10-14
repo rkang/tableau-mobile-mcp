@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="referrer" content="no-referrer" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Return to Tableau</title>
+    <style>
+      body { font-family: -apple-system, system-ui, sans-serif; margin: 3rem 1.5rem; text-align: center; }
+      a { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 0.5rem; background: #1f457e; color: #fff; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <p>Returning to Tableau&hellip;</p>
+    <p><a id="return" href="tableau://mcp-oauth/callback">Return to Tableau</a></p>
+    <script>
+      (function () {
+        // Forward only the authorization response parameters, unchanged, to the app's callback route.
+        var allowed = ['code', 'state', 'iss', 'error', 'error_description'];
+        var incoming = new URLSearchParams(window.location.search);
+        var outgoing = new URLSearchParams();
+        allowed.forEach(function (key) {
+          var value = incoming.get(key);
+          if (value !== null) {
+            outgoing.set(key, value);
+          }
+        });
+        var target = 'tableau://mcp-oauth/callback?' + outgoing.toString();
+        document.getElementById('return').setAttribute('href', target);
+        // Remove the authorization response from this page's URL and history entry before leaving.
+        window.history.replaceState(null, '', window.location.pathname);
+        window.location.replace(target);
+      })();
+    </script>
+  </body>
+</html>
