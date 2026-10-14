@@ -1,0 +1,13 @@
+{
+  "client_id": "https://rkang.github.io/tableau-mobile-mcp/v1/mobile.json",
+  "client_name": "Tableau Mobile Hack Days prototype (unofficial)",
+  "client_uri": "https://rkang.github.io/tableau-mobile-mcp/",
+  "redirect_uris": [
+    "tableau://mcp-oauth/callback",
+    "https://rkang.github.io/tableau-mobile-mcp/v1/callback.html",
+    "com.tableau.mobile.mcp://oauth/callback"
+  ],
+  "grant_types": ["authorization_code", "refresh_token"],
+  "response_types": ["code"],
+  "token_endpoint_auth_method": "none"
+}
